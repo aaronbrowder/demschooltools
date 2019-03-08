@@ -30,7 +30,7 @@ public class TransactionList {
 
     private BigDecimal getBalanceAsOfTransaction(Transaction transaction) {
         return transactions.stream()
-            .filter(t -> t.id <= transaction.id)
+            .filter(t -> getTransactionSortValue(t) <= getTransactionSortValue(transaction))
             .map(t -> t.amount)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
